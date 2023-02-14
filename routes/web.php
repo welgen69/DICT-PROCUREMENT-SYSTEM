@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FormController;
 
 
 /*
@@ -31,4 +32,8 @@ Route::get('/', function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('dashboard/page', 'index')->name('dashboard/page');
     Route::get('form/input', 'index')->name('form/input');
+});
+// -------------------------------- form ------------------------------------//
+Route::controller(FormController::class)->group(function () {
+    Route::get('form/input/page', 'formIndex')->name('form/input/page');
 });
