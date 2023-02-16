@@ -23,7 +23,7 @@ class FormController extends Controller
             'city'        => 'required|string|max:255',
             'country'     => 'required|string|max:255',
             'postal_code' => 'required|string|max:255',
-            'blood_group' => 'required|string|max:255',
+            'blood_group' => 'required|not_in:0',
         ]);
         
         return redirect()->back();
