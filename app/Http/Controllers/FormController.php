@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Models\FormInput;
 
 class FormController extends Controller
 {
@@ -25,7 +27,25 @@ class FormController extends Controller
             'postal_code' => 'required|string|max:255',
             'blood_group' => 'required|not_in:0',
         ]);
-        
-        return redirect()->back();
+
+        DB::beginTransaction();
+        try {
+
+            $saveRecord = new FormInput;
+            $saveRecord->full_name   = $request->full_name;
+            $saveRecord->gender      = $request->gender;
+            $saveRecord->address     = $request->address;
+            $saveRecord->state       = $request->state;
+            $saveRecord->city        = $request->city;
+            $saveRecord->country     = $request->country;
+            $saveRecord->postal_code = $request->postal_code;
+            $saveRecord->blood_group = $request->blood_group;
+            $saveRecord->save();
+            DB::commit();
+            return redirect()->back();
+        } catch(\Exception $e) {
+            DB::rollback();
+            return redirect()->back();
+        }
     }
 }

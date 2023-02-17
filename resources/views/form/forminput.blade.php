@@ -56,7 +56,6 @@
                                                     <option value="O+" {{ old('blood_group') == 'O+' ? "selected" :""}}>O+</option>
                                                     <option value="B+" {{ old('blood_group') == 'B+' ? "selected" :""}}>B+</option>
                                                     <option value="AB+" {{ old('blood_group') == 'AB+' ? "selected" :""}}>AB+</option>
-
                                                 </select>
                                             </div>
                                         </div>
