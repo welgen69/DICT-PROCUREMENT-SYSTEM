@@ -48,4 +48,11 @@ class FormController extends Controller
             return redirect()->back();
         }
     }
+
+    /** page form view */
+    public function formView()
+    {
+        $dataFormInput = FormInput::all();
+        return view('pageview.form-input-table',compact('dataFormInput'));
+    }
 }

@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/plugins/morris/morris.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('assets/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
 </head>
 
@@ -312,6 +314,10 @@
     <script src="{{ URL::to('assets/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/chart.js') }}"></script>
     <script src="{{ URL::to('assets/js/select2.min.js') }}"></script>
+    <script src="{{ URL::to('assets/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::to('assets/js/moment.min.js') }}"></script>
+	<script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
 	@yield('script')
 </body>
