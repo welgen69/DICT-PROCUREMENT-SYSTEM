@@ -23,8 +23,9 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Personal Information</h4>
-                            <form action="" method="POST">
+                            <form action="{{ route('form/input/update') }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $formInputView->id }}">
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group row">
