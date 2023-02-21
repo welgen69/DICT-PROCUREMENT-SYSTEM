@@ -82,8 +82,7 @@
                                             <i class="material-icons">more_vert</i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#edit_leave">
+                                            <a class="dropdown-item" href="{{ url('form/input/edit/'.$items->id) }}">
                                                 <i class="fa fa-pencil m-r-5"></i>Edit
                                             </a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_approve">

@@ -38,4 +38,5 @@ Route::controller(FormController::class)->group(function () {
     Route::get('form/input/page', 'formIndex')->name('form/input/page');
     Route::post('form/input/save', 'formSaveRecord')->name('form/input/save');
     Route::get('form/page/view', 'formView')->name('form/page/view');
+    Route::get('form/input/edit/{id}', 'formInputEdit');
 });

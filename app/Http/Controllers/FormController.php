@@ -55,4 +55,11 @@ class FormController extends Controller
         $dataFormInput = FormInput::all();
         return view('pageview.form-input-table',compact('dataFormInput'));
     }
+
+    /** page edit form input */
+    public function formInputEdit($id)
+    {
+        $formInputView = FormInput::where('id',$id)->first();
+        return view('pageview.form-input-edit',compact('formInputView'));
+    }
 }

@@ -14,7 +14,7 @@
                     </ul>
                 </li>
 
-                <li class="submenu">
+                <li class="ubmenu">
                     <a href="#"><i class="la la-object-group"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
                         <li><a class="{{ set_active(['form/input/page']) }}" href="{{ route('form/input/page') }}">Form Input</a></li>
@@ -23,7 +23,7 @@
                 <li class="submenu">
                     <a href="#"><i class="la la-pie-chart"></i> <span> Page View </span> <span class="menu-arrow"></span></a>
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
-                        <li><a class="{{ set_active(['form/page/view']) }}" href="{{ route('form/page/view') }}">Report Form Input</a></li>
+                        <li><a class="{{ set_active(['form/page/view']) }} {{ request()->is('form/input/edit/*') ? 'active' : '' }}" href="{{ route('form/page/view') }}">Report Form Input</a></li>
                     </ul>
                 </li>
             </ul>
