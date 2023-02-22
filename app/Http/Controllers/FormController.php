@@ -100,4 +100,16 @@ class FormController extends Controller
             return redirect()->back();
         }
     }
+
+    /** delete record */
+    public function formDelete(Request $request)
+    {
+        try {
+            FormInput::destroy($request->id);
+            return redirect()->back();
+        } catch(\Exception $e) {
+            DB::rollback();
+            return redirect()->back();
+        }
+    }
 }
