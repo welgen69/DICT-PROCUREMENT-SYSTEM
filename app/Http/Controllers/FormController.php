@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\FormInput;
+use Brian2694\Toastr\Facades\Toastr;
 
 class FormController extends Controller
 {
@@ -42,9 +43,11 @@ class FormController extends Controller
             $saveRecord->blood_group = $request->blood_group;
             $saveRecord->save();
             DB::commit();
+            Toastr::success('Data has been saved successfully :)','Success');
             return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
+            Toastr::error('Data save fail :)','Error');
             return redirect()->back();
         }
     }
@@ -94,9 +97,11 @@ class FormController extends Controller
             FormInput::where('id',$request->id)->update($updateRecord);
 
             DB::commit();
+            Toastr::success('Data has been updated successfully :)','Success');
             return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
+            Toastr::error('Data update fail :)','Error');
             return redirect()->back();
         }
     }
@@ -106,9 +111,11 @@ class FormController extends Controller
     {
         try {
             FormInput::destroy($request->id);
+            Toastr::success('Data has been deleted successfully :)','Success');
             return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
+            Toastr::error('Data delete fail :)','Error');
             return redirect()->back();
         }
     }
