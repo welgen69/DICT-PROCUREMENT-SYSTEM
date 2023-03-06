@@ -9,20 +9,21 @@
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
-                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+                    <ul style="display: none;">
                         <li><a class="{{ set_active(['/','dashboard/page']) }}" href="{{ route('dashboard/page') }}">Admin Dashboard</a></li>
                     </ul>
                 </li>
 
-                <li class="ubmenu">
+                <li class="submenu">
                     <a href="#"><i class="la la-object-group"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+                    <ul style="display: none;">
                         <li><a class="{{ set_active(['form/input/page']) }}" href="{{ route('form/input/page') }}">Form Input</a></li>
+                        <li><a class="{{ set_active(['form/update/page']) }}" href="{{ route('form/update/page') }}">Form Upload File</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="la la-pie-chart"></i> <span> Page View </span> <span class="menu-arrow"></span></a>
-                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+                    <ul style="display: none;">
                         <li><a class="{{ set_active(['form/page/view']) }} {{ request()->is('form/input/edit/*') ? 'active' : '' }}" href="{{ route('form/page/view') }}">Report Form Input</a></li>
                     </ul>
                 </li>

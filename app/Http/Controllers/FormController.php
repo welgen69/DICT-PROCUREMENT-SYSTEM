@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Uuid;
+use Carbon\Carbon;
 use App\Models\FormInput;
+use App\Models\FileUpload;
 use Brian2694\Toastr\Facades\Toastr;
 
 class FormController extends Controller
@@ -116,6 +119,51 @@ class FormController extends Controller
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Data delete fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
+    /** form upload file index */
+    public function formUpdateIndex()
+    {
+        return view('form.form-upload-file');
+    }
+
+    /** update file */
+    public function formFileUpdate(Request $request) 
+    {
+        $request->validate([
+            'upload_by' => 'required|string|max:255',
+            'file_name' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+
+            $dt = Carbon::now();
+            $date_time = $dt->toDayDateTimeString();
+            $folder_name = "file_store";
+            \Storage::disk('local')->makeDirectory($folder_name, 0775, true); // create directory
+            if($request->hasFile('file_name'))
+            {
+                foreach($request->file_name as $photos) {
+                    $file_name = $photos->getClientOriginalName(); // get file original name
+                    $saveRecord = new FileUpload;
+                    $saveRecord->upload_by = $request->upload_by;
+                    $saveRecord->date_time = $date_time;
+                    $saveRecord->file_name = $file_name;
+                    $saveRecord->uuid = Uuid::generate(5,$date_time . $file_name .$folder_name, Uuid::NS_DNS);
+                    \Storage::disk('local')->put($folder_name.'/'.$file_name,file_get_contents($photos->getRealPath()));
+                    $saveRecord->save();
+                }
+                DB::commit();
+                Toastr::success('Data has been saved successfully :)','Success');
+                return redirect()->back();
+            }
+
+        } catch(\Exception $e) {
+            DB::rollback();
+            Toastr::error('Data save fail :)','Error');
             return redirect()->back();
         }
     }

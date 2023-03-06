@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
 	<script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+    @yield('style')
     
 </head>
 
@@ -324,7 +325,9 @@
 	<script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/moment.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ URL::to('assets/plugins/fileupload/fileupload.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/app.js') }}"></script>
+    
 	@yield('script')
 </body>
 

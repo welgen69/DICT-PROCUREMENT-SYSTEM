@@ -41,5 +41,6 @@ Route::controller(FormController::class)->group(function () {
     Route::get('form/input/edit/{id}', 'formInputEdit');
     Route::post('form/input/update', 'formUpdateRecord')->name('form/input/update');
     Route::post('form/input/delete', 'formDelete')->name('form/input/delete');
-
+    Route::get('form/update/page', 'formUpdateIndex')->name('form/update/page');
+    Route::post('form/upload/file', 'formFileUpdate')->name('form/upload/file'); // file upload
 });
