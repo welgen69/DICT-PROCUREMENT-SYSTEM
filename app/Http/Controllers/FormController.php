@@ -167,4 +167,19 @@ class FormController extends Controller
             return redirect()->back();
         }
     }
+
+    /** view file upload */
+    public function formFileView()
+    {
+        $fileUpload = FileUpload::all();
+        return view('pageview.view-file-upload-table',compact('fileUpload'));
+    }
+
+    /** file upload */
+    public function fileDownload($file_name)
+    {
+        $fileDownload = FileUpload::where('file_name',$file_name)->first();
+        $download     = storage_path("app/file_store/{$fileDownload->file_name}");
+        return \Response::download($download);
+    }
 }
