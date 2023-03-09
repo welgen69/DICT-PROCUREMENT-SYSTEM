@@ -182,4 +182,19 @@ class FormController extends Controller
         $download     = storage_path("app/file_store/{$fileDownload->file_name}");
         return \Response::download($download);
     }
+
+    /** delete record and remove file in folder */
+    public function fileDelete(Request $request)
+    {
+        try {
+            FileUpload::destroy($request->id);
+            unlink(storage_path("app/file_store/".$request->file_name));
+            Toastr::success('Data has been deleted successfully :)','Success');
+            return redirect()->back();
+        } catch(\Exception $e) {
+            DB::rollback();
+            Toastr::error('Data delete fail :)','Error');
+            return redirect()->back();
+        }
+    }
 }

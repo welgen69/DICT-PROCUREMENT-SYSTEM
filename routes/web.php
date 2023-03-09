@@ -45,4 +45,5 @@ Route::controller(FormController::class)->group(function () {
     Route::post('form/upload/file', 'formFileUpdate')->name('form/upload/file'); // file upload
     Route::get('view/upload/file', 'formFileView')->name('view/upload/file'); // file view
     Route::get('download/file/{file_name}', 'fileDownload'); // file download
+    Route::post('download/file/delete', 'fileDelete')->name('download/file/delete'); // file delete
 });
