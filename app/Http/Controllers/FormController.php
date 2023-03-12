@@ -8,6 +8,8 @@ use Uuid;
 use Carbon\Carbon;
 use App\Models\FormInput;
 use App\Models\FileUpload;
+use App\Models\question;
+use App\Models\answer;
 use Brian2694\Toastr\Facades\Toastr;
 
 class FormController extends Controller
@@ -196,5 +198,13 @@ class FormController extends Controller
             Toastr::error('Data delete fail :)','Error');
             return redirect()->back();
         }
+    }
+
+    /** checkbox index page */
+    public function radioIndex()
+    {
+        $questions = question::all();
+        $answers   = answer::all();
+        return view('form.form-radio',compact('questions','answers'));
     }
 }

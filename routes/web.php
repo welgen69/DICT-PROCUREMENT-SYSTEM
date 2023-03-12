@@ -42,8 +42,12 @@ Route::controller(FormController::class)->group(function () {
     Route::post('form/input/update', 'formUpdateRecord')->name('form/input/update');
     Route::post('form/input/delete', 'formDelete')->name('form/input/delete');
     Route::get('form/update/page', 'formUpdateIndex')->name('form/update/page');
+
     Route::post('form/upload/file', 'formFileUpdate')->name('form/upload/file'); // file upload
     Route::get('view/upload/file', 'formFileView')->name('view/upload/file'); // file view
     Route::get('download/file/{file_name}', 'fileDownload'); // file download
     Route::post('download/file/delete', 'fileDelete')->name('download/file/delete'); // file delete
+
+    Route::get('form/radio/index', 'radioIndex')->name('form/radio/index'); // checkbox index
+
 });

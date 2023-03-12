@@ -18,6 +18,7 @@
                     <a href="#"><i class="la la-object-group"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a class="{{ set_active(['form/input/page']) }}" href="{{ route('form/input/page') }}">Form Input</a></li>
+                        <li><a class="{{ set_active(['form/radio/index']) }}" href="{{ route('form/radio/index') }}">Form Radio</a></li>
                         <li><a class="{{ set_active(['form/update/page']) }}" href="{{ route('form/update/page') }}">Form Upload File</a></li>
                     </ul>
                 </li>
