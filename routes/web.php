@@ -49,5 +49,6 @@ Route::controller(FormController::class)->group(function () {
     Route::post('download/file/delete', 'fileDelete')->name('download/file/delete'); // file delete
 
     Route::get('form/radio/index', 'radioIndex')->name('form/radio/index'); // checkbox index
+    Route::post('form/radio/save', 'radioSave')->name('form/radio/save'); // checkbox index
 
 });

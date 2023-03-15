@@ -10,6 +10,7 @@ use App\Models\FormInput;
 use App\Models\FileUpload;
 use App\Models\question;
 use App\Models\answer;
+use App\Models\AnswerSave;
 use Brian2694\Toastr\Facades\Toastr;
 
 class FormController extends Controller
@@ -206,5 +207,45 @@ class FormController extends Controller
         $questions = question::all();
         $answers   = answer::all();
         return view('form.form-radio',compact('questions','answers'));
+    }
+
+    /** save record */
+    public function radioSave(Request $request)
+    {
+        // $request->validate([
+        //     ''   => 'required|string|max:255',
+        // ]);
+
+        DB::beginTransaction();
+        // try {
+
+            $saveRecord = new AnswerSave;
+            $count = 1;
+            foreach($request->input('answer_name'.$count)  as $key=>$question_id) {
+                $data[] = [
+                    'answer_name'=> $request->input('answer_name'.$count)[$key],
+                    'question_id'=>  $request->question_id[$key],
+                ];
+            $saveRecord->$data[$i]->save();
+        
+            }
+
+            // for ($i=0; $i<$request->answer_name; $i++){
+            //     $data[] = [
+            //     'answer_name' => $request->input('answer_name'.$count)[$i],    
+            //     'question_id' => $request->input('question_id')[$i],
+            //     ];
+            // $saveRecord->$data[$i]->save(); 
+        // }
+           
+
+            DB::commit();
+            Toastr::success('Question has been saved successfully :)','Success');
+            return redirect()->back();
+        // } catch(\Exception $e) {
+        //     DB::rollback();
+        //     Toastr::error('Question save fail :)','Error');
+        //     return redirect()->back();
+        // }
     }
 }

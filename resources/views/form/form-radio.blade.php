@@ -103,7 +103,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <form id="validateform" action="" method="POST">
+                    <form id="validateform" action="{{ route('form/radio/save') }}" method="POST">
+                        @csrf
                         <a class="job-list">
                             <div class="job-list-det">
                                 <div class="job-list-desc">
@@ -114,10 +115,11 @@
                                 @if ($question->question_id == '1')
                                     <div class="job-list-footer">
                                         <h4 class="job-list-title">{{ $question->question_name }}</h4>
+                                        <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
                                         @foreach ($answers as $answer)
                                             @if ($answer->question_id == '1')
                                             <label>
-                                                <input type="radio" class="option-input radio" name="question_two{{ $answer->question_id }}" value="{{ $answer->answer_name }}">
+                                                <input type="radio" class="option-input radio" name="answer_name{{ $answer->question_id }}[]" value="{{ $answer->answer_name }}">
                                                 {{ $answer->answer_name }}
                                             </label>
                                             @endif
@@ -136,10 +138,11 @@
                             @if ($question->question_id == '2')
                             <div class="job-list-footer">
                                 <h4 class="job-list-title">{{ $question->question_name }}</h4>
+                                <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
                                 @foreach ($answers as $answer)
                                 @if ($answer->question_id == '2')
                                 <label>
-                                    <input type="radio" class="option-input radio" name="question_two{{ $answer->question_id }}" value="{{ $answer->answer_name }}">
+                                    <input type="radio" class="option-input radio" name="answer_name{{ $answer->question_id }}[]" value="{{ $answer->answer_name }}">
                                     {{ $answer->answer_name }}
                                 </label>
                                 @endif
@@ -158,10 +161,11 @@
                                 @if ($question->question_id == '3')
                                 <div class="job-list-footer">
                                     <h4 class="job-list-title">{{ $question->question_name }}</h4>
+                                    <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
                                     @foreach ($answers as $answer)
                                         @if ($answer->question_id == '3')
                                         <label>
-                                            <input type="radio" class="option-input radio" name="question_two{{ $answer->question_id }}" value="{{ $answer->answer_name }}">
+                                            <input type="radio" class="option-input radio" name="answer_name{{ $answer->question_id }}[]" value="{{ $answer->answer_name }}">
                                             {{ $answer->answer_name }}
                                         </label>
                                         @endif
