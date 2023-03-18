@@ -115,7 +115,7 @@
                                 @if ($question->question_id == '1')
                                     <div class="job-list-footer">
                                         <h4 class="job-list-title">{{ $question->question_name }}</h4>
-                                        <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
+                                        <input type="hidden" name="question_id1" value="{{ $question->question_id }}">
                                         @foreach ($answers as $answer)
                                             @if ($answer->question_id == '1')
                                             <label>
@@ -138,7 +138,7 @@
                             @if ($question->question_id == '2')
                             <div class="job-list-footer">
                                 <h4 class="job-list-title">{{ $question->question_name }}</h4>
-                                <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
+                                <input type="hidden" name="question_id2" value="{{ $question->question_id }}">
                                 @foreach ($answers as $answer)
                                 @if ($answer->question_id == '2')
                                 <label>
@@ -161,7 +161,7 @@
                                 @if ($question->question_id == '3')
                                 <div class="job-list-footer">
                                     <h4 class="job-list-title">{{ $question->question_name }}</h4>
-                                    <input type="hidden" name="question_id[]" value="{{ $question->question_id }}">
+                                    <input type="hidden" name="question_id3" value="{{ $question->question_id }}">
                                     @foreach ($answers as $answer)
                                         @if ($answer->question_id == '3')
                                         <label>

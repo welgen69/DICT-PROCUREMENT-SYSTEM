@@ -217,35 +217,45 @@ class FormController extends Controller
         // ]);
 
         DB::beginTransaction();
-        // try {
-
-            $saveRecord = new AnswerSave;
-            $count = 1;
-            foreach($request->input('answer_name'.$count)  as $key=>$question_id) {
-                $data[] = [
-                    'answer_name'=> $request->input('answer_name'.$count)[$key],
-                    'question_id'=>  $request->question_id[$key],
-                ];
-            $saveRecord->$data[$i]->save();
-        
+        try {
+            if ($request->question_id1 == 1) {
+                $count = 1;
+                foreach ($request->input('answer_name'.$count) as $key => $answer) {
+                    $saveRecord = [
+                        'answer_name'=> $request->input('answer_name'.$count)[$key],
+                        'question_id'=> $request->input('question_id'.$count)[$key],
+                    ];
+                }
+                DB::table('answer_saves')->insert($saveRecord);
             }
-
-            // for ($i=0; $i<$request->answer_name; $i++){
-            //     $data[] = [
-            //     'answer_name' => $request->input('answer_name'.$count)[$i],    
-            //     'question_id' => $request->input('question_id')[$i],
-            //     ];
-            // $saveRecord->$data[$i]->save(); 
-        // }
-           
+            if ($request->question_id2 == 2) {
+                $count = 2;
+                foreach ($request->input('answer_name'.$count) as $key => $answer) {
+                    $saveRecord = [
+                        'answer_name'=> $request->input('answer_name'.$count)[$key],
+                        'question_id'=> $request->input('question_id'.$count)[$key],
+                    ];
+                }
+                DB::table('answer_saves')->insert($saveRecord);
+            }
+            if ($request->question_id3 == 3) {
+                $count = 3;
+                foreach ($request->input('answer_name'.$count) as $key => $answer) {
+                    $saveRecord = [
+                        'answer_name'=> $request->input('answer_name'.$count)[$key],
+                        'question_id'=> $request->input('question_id'.$count)[$key],
+                    ];
+                }
+                DB::table('answer_saves')->insert($saveRecord);
+            }
 
             DB::commit();
             Toastr::success('Question has been saved successfully :)','Success');
             return redirect()->back();
-        // } catch(\Exception $e) {
-        //     DB::rollback();
-        //     Toastr::error('Question save fail :)','Error');
-        //     return redirect()->back();
-        // }
+        } catch(\Exception $e) {
+            DB::rollback();
+            Toastr::error('Question save fail :)','Error');
+            return redirect()->back();
+        }
     }
 }
