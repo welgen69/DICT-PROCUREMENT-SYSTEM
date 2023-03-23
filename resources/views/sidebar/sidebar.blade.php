@@ -19,6 +19,7 @@
                     <ul style="display: none;">
                         <li><a class="{{ set_active(['form/input/page']) }}" href="{{ route('form/input/page') }}">Form Input</a></li>
                         <li><a class="{{ set_active(['form/radio/index']) }}" href="{{ route('form/radio/index') }}">Form Radio</a></li>
+                        <li><a class="{{ set_active(['form/checkbox/index']) }}" href="{{ route('form/checkbox/index') }}">Form Checkbox</a></li>
                         <li><a class="{{ set_active(['form/update/page']) }}" href="{{ route('form/update/page') }}">Form Upload File</a></li>
                     </ul>
                 </li>

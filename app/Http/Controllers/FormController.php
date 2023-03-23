@@ -201,7 +201,7 @@ class FormController extends Controller
         }
     }
 
-    /** checkbox index page */
+    /** radio index page */
     public function radioIndex()
     {
         $questions = question::all();
@@ -212,10 +212,6 @@ class FormController extends Controller
     /** save record */
     public function radioSave(Request $request)
     {
-        // $request->validate([
-        //     ''   => 'required|string|max:255',
-        // ]);
-
         DB::beginTransaction();
         try {
             if ($request->question_id1 == 1) {
@@ -258,4 +254,11 @@ class FormController extends Controller
             return redirect()->back();
         }
     }
+
+    /** checkbox index page */
+    public function checkboxIndex()
+    {
+        return view('form.form-checkbox');
+    }
+
 }
