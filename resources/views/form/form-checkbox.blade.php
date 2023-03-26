@@ -36,7 +36,7 @@
             background: #9faab7;
         }
         .option-input:checked {
-            background: #FF851A;
+            background: #25e182;
         }
         .option-input:checked::before {
             width: 25px;
@@ -54,7 +54,7 @@
             -webkit-animation: click-wave 0.65s;
             -moz-animation: click-wave 0.65s;
             animation: click-wave 0.65s;
-            background: #FF851A;
+            background: #25e182;
             content: '';
             display: block;
             position: relative;
@@ -108,61 +108,48 @@
                         <a class="job-list">
                             <div class="job-list-det">
                                 <div class="job-list-desc">
-                                    <h3 class="job-list-title">Question One</h3>
+                                    <h3 class="job-list-title">Front-End Develop</h3>
                                 </div>
                             </div>
                             <div class="job-list-footer">
-                                <h4 class="job-list-title">Programe</h4>
-                                <input type="hidden" name="question" value="FF">
+                                <input type="hidden" name="front_end_id" value="1">
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="HTML">
+                                    <input type="checkbox" class="option-input checkbox" name="front_end[]" value="HTML">
                                     HTML
                                 </label>
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="CSS">
+                                    <input type="checkbox" class="option-input checkbox" name="front_end[]" value="CSS">
                                     CSS
                                 </label>
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="PHP">
-                                    PHP
+                                    <input type="checkbox" class="option-input checkbox" name="front_end[]" value="Javascript">
+                                    Javascript
+                                </label>
+                                <label>
+                                    <input type="checkbox" class="option-input checkbox" name="front_end[]" value="Vue.js">
+                                    Vue.js
                                 </label>
                             </div>
                         </a>
                         <a class="job-list">
                             <div class="job-list-det">
                                 <div class="job-list-desc">
-                                    <h3 class="job-list-title">Question Two</h3>
+                                    <h3 class="job-list-title">Back-End Develop</h3>
                                 </div>
                             </div>
                             <div class="job-list-footer">
-                                <h4 class="job-list-title">Programe</h4>
-                                <input type="hidden" name="question" value="FF">
+                                <input type="hidden" name="back_end_id" value="2">
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="C++">
-                                    C++
+                                    <input type="checkbox" class="option-input checkbox" name="back_end[]" value="Laravel Framwork">
+                                    Laravel Framwork
                                 </label>
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value=" C#">
-                                    C#
-                                </label>
-                            </div>
-                        </a>
-                        <a class="job-list">
-                            <div class="job-list-det">
-                                <div class="job-list-desc">
-                                    <h3 class="job-list-title">Question Three</h3>
-                                </div>
-                            </div>
-                            <div class="job-list-footer">
-                                <h4 class="job-list-title">Programe</h4>
-                                <input type="hidden" name="question" value="FF">
-                                <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="JAVA">
-                                    JAVA
+                                    <input type="checkbox" class="option-input checkbox" name="back_end[]" value="Node.js">
+                                    Node.js
                                 </label>
                                 <label>
-                                    <input type="checkbox" class="option-input checkbox" name="ff" value="Not.js">
-                                    Not.js
+                                    <input type="checkbox" class="option-input checkbox" name="back_end[]" value="Java">
+                                    Java
                                 </label>
                             </div>
                         </a>
