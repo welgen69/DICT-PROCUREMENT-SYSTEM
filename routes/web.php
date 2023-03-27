@@ -52,5 +52,6 @@ Route::controller(FormController::class)->group(function () {
     Route::post('form/radio/save', 'radioSave')->name('form/radio/save'); // radio save
 
     Route::get('form/checkbox/index', 'checkboxIndex')->name('form/checkbox/index'); // checkbox index
+    Route::post('form/checkbox/save', 'saveRecordCheckbox')->name('form/checkbox/save'); // checkbox save
 
 });

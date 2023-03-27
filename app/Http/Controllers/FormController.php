@@ -261,4 +261,48 @@ class FormController extends Controller
         return view('form.form-checkbox');
     }
 
+    /** save record checkbox */
+    public function saveRecordCheckbox(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $id_value = DB::table('language_codes')->select('id')->orderBy('id','DESC')->first();
+            if(!empty($id_value->id)) { /** if id in table not null */
+                $language_id = $id_value->id;
+            } else { /** id in table is null */
+                $language_id = 1;
+            }
+
+            if ($request->front_end_id == 1) {
+                for ($i = 0; $i< count($request->front_end);$i++) {
+                    $saveRecord = [
+                        'id_value'      => $request->front_end_id,
+                        'language_name' => $request->front_end[$i],
+                        'language_id'   => $language_id,
+                    ];
+                    DB::table('language_codes')->insert($saveRecord);
+                }
+            }
+            
+            if ($request->back_end_id == 2) {
+                for ($i = 0; $i< count($request->back_end);$i++) {
+                    $saveRecord = [
+                        'id_value'      => $request->back_end_id,
+                        'language_name' => $request->back_end[$i],
+                        'language_id'   => $language_id,
+                    ];
+                    DB::table('language_codes')->insert($saveRecord);
+                }
+            }
+           
+            DB::commit();
+            Toastr::success('Data has been saved successfully :)','Success');
+            return redirect()->back();
+        } catch(\Exception $e) {
+            DB::rollback();
+            Toastr::error('Data save fail :)','Error');
+            return redirect()->back();
+        }
+    }
 }

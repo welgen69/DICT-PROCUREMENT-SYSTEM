@@ -103,7 +103,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <form id="validateform" action="" method="POST">
+                    <form id="validateform" action="{{ route('form/checkbox/save') }}" method="POST">
                         @csrf
                         <a class="job-list">
                             <div class="job-list-det">
@@ -153,7 +153,6 @@
                                 </label>
                             </div>
                         </a>
-                       
                         <div class="submit-section">
                             <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                         </div>
