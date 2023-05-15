@@ -18,45 +18,9 @@ class FormController extends Controller
     /** form index */
     public function formIndex()
     {
-        return view('form.forminput');
+        return view('form.form-upload-file');
     }
 
-    /** save record */
-    public function formSaveRecord(Request $request)
-    {
-        $request->validate([
-            'full_name'   => 'required|string|max:255',
-            'gender'      => 'required|string|max:255',
-            'address'     => 'required|string|max:255',
-            'state'       => 'required|string|max:255',
-            'city'        => 'required|string|max:255',
-            'country'     => 'required|string|max:255',
-            'postal_code' => 'required|string|max:255',
-            'blood_group' => 'required|not_in:0',
-        ]);
-
-        DB::beginTransaction();
-        try {
-
-            $saveRecord = new FormInput;
-            $saveRecord->full_name   = $request->full_name;
-            $saveRecord->gender      = $request->gender;
-            $saveRecord->address     = $request->address;
-            $saveRecord->state       = $request->state;
-            $saveRecord->city        = $request->city;
-            $saveRecord->country     = $request->country;
-            $saveRecord->postal_code = $request->postal_code;
-            $saveRecord->blood_group = $request->blood_group;
-            $saveRecord->save();
-            DB::commit();
-            Toastr::success('Data has been saved successfully :)','Success');
-            return redirect()->back();
-        } catch(\Exception $e) {
-            DB::rollback();
-            Toastr::error('Data save fail :)','Error');
-            return redirect()->back();
-        }
-    }
 
     /** page form view */
     public function formView()
@@ -137,6 +101,7 @@ class FormController extends Controller
     {
         $request->validate([
             'upload_by' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'file_name' => 'required',
         ]);
 
@@ -153,9 +118,9 @@ class FormController extends Controller
                     $file_name = $photos->getClientOriginalName(); // get file original name
                     $saveRecord = new FileUpload;
                     $saveRecord->upload_by = $request->upload_by;
+                    $saveRecord->description = $request->description;
                     $saveRecord->date_time = $date_time;
                     $saveRecord->file_name = $file_name;
-                    $saveRecord->uuid = Uuid::generate(5,$date_time . $file_name .$folder_name, Uuid::NS_DNS);
                     \Storage::disk('local')->put($folder_name.'/'.$file_name,file_get_contents($photos->getRealPath()));
                     $saveRecord->save();
                 }
@@ -183,8 +148,45 @@ class FormController extends Controller
     {
         $fileDownload = FileUpload::where('file_name',$file_name)->first();
         $download     = storage_path("app/file_store/{$fileDownload->file_name}");
-        return \Response::download($download);
+        return \Response::file($download);
     }
+
+        /** file edit input */
+        public function fileInputEdit($id)
+        {
+            $fileInputView = FileUpload::where('id',$id)->first();
+            return view('pageview.file-input-edit',compact('fileInputView'));
+        }
+    
+        /** update record form file input */
+        public function fileUpdateRecord(Request $request)
+        {
+            $request->validate([
+            'upload_by' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'status' => 'required|not_in:0',
+            ]);
+    
+            DB::beginTransaction();
+            try {
+    
+                $updateFile = [
+                    'upload_by'   => $request->upload_by,
+                    'description'      => $request->description,
+                    'status'     => $request->status,
+                ];
+                
+                FileUpload::where('id',$request->id)->update($updateFile);
+    
+                DB::commit();
+                Toastr::success('Data has been updated successfully :)','Success');
+                return redirect()->back();
+            } catch(\Exception $e) {
+                DB::rollback();
+                Toastr::error('Data update fail :)','Error');
+                return redirect()->back();
+            }
+        }
 
     /** delete record and remove file in folder */
     public function fileDelete(Request $request)
@@ -201,108 +203,5 @@ class FormController extends Controller
         }
     }
 
-    /** radio index page */
-    public function radioIndex()
-    {
-        $questions = question::all();
-        $answers   = answer::all();
-        return view('form.form-radio',compact('questions','answers'));
-    }
-
-    /** save record */
-    public function radioSave(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-            if ($request->question_id1 == 1) {
-                $count = 1;
-                foreach ($request->input('answer_name'.$count) as $key => $answer) {
-                    $saveRecord = [
-                        'answer_name'=> $request->input('answer_name'.$count)[$key],
-                        'question_id'=> $request->input('question_id'.$count)[$key],
-                    ];
-                }
-                DB::table('answer_saves')->insert($saveRecord);
-            }
-            if ($request->question_id2 == 2) {
-                $count = 2;
-                foreach ($request->input('answer_name'.$count) as $key => $answer) {
-                    $saveRecord = [
-                        'answer_name'=> $request->input('answer_name'.$count)[$key],
-                        'question_id'=> $request->input('question_id'.$count)[$key],
-                    ];
-                }
-                DB::table('answer_saves')->insert($saveRecord);
-            }
-            if ($request->question_id3 == 3) {
-                $count = 3;
-                foreach ($request->input('answer_name'.$count) as $key => $answer) {
-                    $saveRecord = [
-                        'answer_name'=> $request->input('answer_name'.$count)[$key],
-                        'question_id'=> $request->input('question_id'.$count)[$key],
-                    ];
-                }
-                DB::table('answer_saves')->insert($saveRecord);
-            }
-
-            DB::commit();
-            Toastr::success('Question has been saved successfully :)','Success');
-            return redirect()->back();
-        } catch(\Exception $e) {
-            DB::rollback();
-            Toastr::error('Question save fail :)','Error');
-            return redirect()->back();
-        }
-    }
-
-    /** checkbox index page */
-    public function checkboxIndex()
-    {
-        return view('form.form-checkbox');
-    }
-
-    /** save record checkbox */
-    public function saveRecordCheckbox(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-
-            $id_value = DB::table('language_codes')->select('id')->orderBy('id','DESC')->first();
-            if(!empty($id_value->id)) { /** if id in table not null */
-                $language_id = $id_value->id;
-            } else { /** id in table is null */
-                $language_id = 1;
-            }
-
-            if ($request->front_end_id == 1) {
-                for ($i = 0; $i< count($request->front_end);$i++) {
-                    $saveRecord = [
-                        'id_value'      => $request->front_end_id,
-                        'language_name' => $request->front_end[$i],
-                        'language_id'   => $language_id,
-                    ];
-                    DB::table('language_codes')->insert($saveRecord);
-                }
-            }
-            
-            if ($request->back_end_id == 2) {
-                for ($i = 0; $i< count($request->back_end);$i++) {
-                    $saveRecord = [
-                        'id_value'      => $request->back_end_id,
-                        'language_name' => $request->back_end[$i],
-                        'language_id'   => $language_id,
-                    ];
-                    DB::table('language_codes')->insert($saveRecord);
-                }
-            }
-           
-            DB::commit();
-            Toastr::success('Data has been saved successfully :)','Success');
-            return redirect()->back();
-        } catch(\Exception $e) {
-            DB::rollback();
-            Toastr::error('Data save fail :)','Error');
-            return redirect()->back();
-        }
-    }
-}
+    
+} 

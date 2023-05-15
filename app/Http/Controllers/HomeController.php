@@ -9,6 +9,6 @@ class HomeController extends Controller
     /** index page dashboard */
     public function index()
     {
-        return view('dashboard.dashboard');
+        return view('form.form-upload-file');
     }
 }

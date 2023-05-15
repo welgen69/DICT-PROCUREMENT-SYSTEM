@@ -15,6 +15,9 @@ use App\Http\Controllers\FormController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 /** set active side bar */
 function set_active($route) {
@@ -25,7 +28,7 @@ function set_active($route) {
 }
 
 Route::get('/', function () {
-    return view('dashboard.dashboard');
+    return view('form.form-upload-file');
 })->name('/');
 
 // ----------------------------- main dashboard ------------------------------//
@@ -43,8 +46,11 @@ Route::controller(FormController::class)->group(function () {
     Route::post('form/input/delete', 'formDelete')->name('form/input/delete');
     Route::get('form/update/page', 'formUpdateIndex')->name('form/update/page');
 
+
     Route::post('form/upload/file', 'formFileUpdate')->name('form/upload/file'); // file upload
     Route::get('view/upload/file', 'formFileView')->name('view/upload/file'); // file view
+    Route::get('form/input/edit/{id}', 'fileInputEdit');
+    Route::post('form/input/update', 'fileUpdateRecord')->name('form/input/update');
     Route::get('download/file/{file_name}', 'fileDownload'); // file download
     Route::post('download/file/delete', 'fileDelete')->name('download/file/delete'); // file delete
 

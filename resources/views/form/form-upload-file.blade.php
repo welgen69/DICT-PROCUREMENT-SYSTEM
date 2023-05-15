@@ -72,7 +72,13 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control @error('upload_by') is-invalid @enderror" name="upload_by" placeholder="Upload by" value="{{ old('upload_by') }}">
                                     </div>
-                                </div> 
+                                </div>
+                                <div class="form-group">
+                                <div class="col-xl-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description" value="{{ old('description') }}">
+                                    </div>
+                                </div>
                                 <input type="file" name="file_name[]" id="file" class="input-file @error('file_name[]') is-invalid @enderror" multiple>
                                 <label for="file" class="btn btn-tertiary js-labelFile">
                                     <i class="icon fa fa-check"></i>

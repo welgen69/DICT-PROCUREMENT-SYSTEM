@@ -1,5 +1,17 @@
 
 @extends('layouts.master')
+@section('style')
+
+<style>
+ 
+    .page-item.active .page-link:hover{
+        background-color:#FF0013;
+        }
+        
+</style>
+
+@endsection
+
 @section('content')
     {{-- message --}}
     {!! Toastr::message() !!}
@@ -17,34 +29,6 @@
                 </div>
             </div>
 
-            <div class="row filter-row">
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus select-focus">
-                        <input class="form-control floating" type="text">
-                        <label class="focus-label">Full Name By</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">From</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">To</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="#" class="btn btn-success btn-block"> Search </a>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -55,8 +39,8 @@
                                     <th>Upload By</th>
                                     <th>Date Time</th>
                                     <th>File Name</th>
-                                    <th>Uuid</th>
-                                    <th>View File</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -68,17 +52,23 @@
                                         <strong>{{ $items->upload_by }}</strong>
                                     </td>
                                     <td>{{ $items->date_time }}</td>
-                                    <td><a href="{{ url('download/file/'.$items->file_name) }}" class="file_name">{{ $items->file_name }}</a></td>
-                                    <td>{{ $items->uuid }}</td>
-                                    <td>
-                                        <span class="avatar">
-                                            <img alt="" src="">
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="dropdown-item delete" href="#" data-toggle="modal" data-target="#delete_record">
-                                            <i class="fa fa-trash-o m-r-5"></i>
-                                        </a>
+                                    <td><a href="{{ url('download/file/'.$items->file_name ) }} "target="_blank"  class="file_name">{{ $items->file_name }}</a></td>
+                                    <td><strong>{{ $items->description }}</strong></td>
+                                    <td><strong>{{ $items->status }}</strong></td>
+                                    <td class="text-right">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="{{ url('form/input/edit/'.$items->id) }}">
+                                                    <i class="fa fa-pencil m-r-5"></i>Edit
+                                                </a>
+                                                <a class="dropdown-item delete" href="#" data-toggle="modal" data-target="#delete_record">
+                                                    <i class="fa fa-trash-o m-r-5"></i>Delete
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
